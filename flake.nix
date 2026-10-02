@@ -16,6 +16,8 @@
           gcc
           gnumake
           SDL2
+
+          libX11
         ];
       };
     }
