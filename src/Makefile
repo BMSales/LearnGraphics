@@ -1,9 +1,10 @@
 CFLAGS = -std=c++17 -O2
+LDFLAGS = -lX11
 
 compile:
-	g++ $(CFLAGS) -o ./bin/program *.cpp `sdl2-config --cflags --libs`
+	g++ $(CFLAGS) -o ./bin/program *.cpp ./include/*.cpp $(LDFLAGS) `sdl2-config --cflags --libs`
 
-test:
+run:
 	./bin/program
 
 clean:
