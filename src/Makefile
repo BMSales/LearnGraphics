@@ -9,3 +9,4 @@ run:
 
 clean:
 	rm -f ./bin/*
+	rm imgui.ini
