@@ -125,7 +125,7 @@ void TutorialUI::LoadContent(){
     }
   }
   else {
-    std::cout << "Couldn't find slides directory: " + slides_dir << std::endl;
+    std::cout << "Couldn't find slides directory: " + slides_dir.string() << std::endl;
     return;
   }
 }
