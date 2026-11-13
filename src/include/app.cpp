@@ -19,10 +19,6 @@ void App::Initiate(){
 }
 
 void App::Run(){
-  TutorialUI tutorial = TutorialUI();
-
-  tutorial.Initiate();
-
   SDL_Surface* screenSurface = SDL_GetWindowSurface(window);
   SDL_GLContext sdlContext = SDL_GL_CreateContext(window);
   SDL_Event event;
@@ -51,8 +47,7 @@ void App::Run(){
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
-
-    tutorial.SlideshowWindow();
+    ImGui::ShowDemoWindow();
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

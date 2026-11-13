@@ -1,3 +1,4 @@
 bin/*
 slides/*
+include/imgui/*
 imgui.ini
