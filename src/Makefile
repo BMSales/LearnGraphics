@@ -41,9 +41,9 @@ $(IMGUI_DIR):
 
 compile: $(IMGUI_DIR)
 	mkdir -p ./bin
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -o ./bin/program $(SRC) include/glad/src/glad.c $(LDFLAGS) 
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -o ./bin/program $(SRC) include/glad/src/glad.c $(LDFLAGS)
 
-run: compile
+run:
 	./bin/program
 
 clean:
