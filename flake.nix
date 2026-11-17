@@ -1,5 +1,5 @@
 {
-  description = "OpenGL Dev Environment";
+  description = "LearnGraphics Dev Environment";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
@@ -13,11 +13,15 @@
     in {
       devShell = pkgs.mkShell {
         buildInputs = with pkgs; [
+          glfw3
           gcc
           gnumake
-          SDL2
 
           libX11
+          libXrandr
+          libXcursor
+          libXi
+          libXxf86vm
         ];
       };
     }
