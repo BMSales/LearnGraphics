@@ -13,11 +13,15 @@
     in {
       devShell = pkgs.mkShell {
         buildInputs = with pkgs; [
+          glfw3
           gcc
           gnumake
-          SDL2
 
           libX11
+          libXrandr
+          libXcursor
+          libXi
+          libXxf86vm
         ];
       };
     }
