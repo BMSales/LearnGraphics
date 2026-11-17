@@ -1,4 +1,3 @@
 bin/*
-slides/*
-include/imgui/*
+deps/*
 imgui.ini
