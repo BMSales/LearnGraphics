@@ -1,6 +1,6 @@
 #include "shader.h"
 
-Shader::Shader(const char* vertexPath, const char* fragmentPath){
+unsigned int Shader::compileAndLink(const char* vertexPath, const char* fragmentPath){
   //1. retrieve the vertex and fragment source codes from filePath
   std::string vertexCode;
   std::string fragmentCode;
@@ -66,11 +66,11 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath){
   }
 
   //shader program
-  ID = glCreateProgram();
+  unsigned int id = glCreateProgram();
 
-  glAttachShader(ID, vertex);
-  glAttachShader(ID, fragment);
-  glLinkProgram(ID);
+  glAttachShader(id, vertex);
+  glAttachShader(id, fragment);
+  glLinkProgram(id);
 
   glGetProgramiv(ID, GL_LINK_STATUS, &success);
   if(!success){
@@ -81,6 +81,20 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath){
   //delete the shaders as they're linked into our program and are no longer needed
   glDeleteShader(vertex);
   glDeleteShader(fragment);
+
+  return id;
+}
+Shader::Shader(const char* vertexPath, const char* fragmentPath){
+  this->ID = compileAndLink(vertexPath, fragmentPath);
+}
+
+void Shader::reload(const char* vertexPath, const char* fragmentPath) {
+    unsigned int newID = compileAndLink(vertexPath, fragmentPath);
+
+    if (newID != 0) {
+        glDeleteProgram(this->ID);
+        this->ID = newID;
+    }
 }
 
 void Shader::use(){

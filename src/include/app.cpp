@@ -87,6 +87,10 @@ void App::Run(){
 
     glBindVertexArray(0);
 
+    if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS){
+      shaderProgram.reload("./shaders/vertex.glsl", "./shaders/fragment.glsl");
+    }
+
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS){
       glfwSetWindowShouldClose(window, true);
     }
@@ -99,5 +103,3 @@ void App::Run(){
 void App::Destroy(){
   glfwTerminate();
 }
-
-

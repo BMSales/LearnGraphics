@@ -15,7 +15,11 @@ class Shader {
 
     void use();
 
+    void reload(const char*, const char*);
     void setBool(const std::string &name, bool value) const;
     void setInt(const std::string &name, int value) const;
     void setFloat(const std::string &name, float value) const;
+
+  private:
+    unsigned int compileAndLink(const char*, const char*);
 };
