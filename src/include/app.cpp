@@ -25,10 +25,10 @@ void App::shaderEditorWindow(Shader& shaderProgram){
   if(ImGui::Begin("TEST", nullptr, flags)){
     ImGui::InputTextMultiline("test", text, IM_ARRAYSIZE(text), ImVec2(-FLT_MIN, 200.0f), ImGuiInputTextFlags_AllowTabInput);
     if(ImGui::Button("RELOAD")){
-      std::ofstream out("./shaders/vertex.glsl");
+      std::ofstream out("./shaders/new_shader.glsl");
       out << text;
       out.close();
-      shaderProgram.reload("./shaders/vertex.glsl", "./shaders/fragment.glsl");
+      shaderProgram.reload("./shaders/new_shader.glsl", "./shaders/fragment.glsl");
     }
     if(ImGui::Button("CLOSE")){
       glfwSetWindowShouldClose(window, true);
@@ -127,10 +127,6 @@ void App::Run(){
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-    if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS){
-      shaderProgram.reload("./shaders/vertex.glsl", "./shaders/fragment.glsl");
-    }
 
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS){
       glfwSetWindowShouldClose(window, true);
