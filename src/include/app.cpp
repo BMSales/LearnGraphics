@@ -15,6 +15,29 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height){
   glViewport(0, 0, width, height);
 }
 
+void App::shaderEditorWindow(Shader& shaderProgram){
+  ImGui::SetNextWindowSize(ImVec2(500.0f, 500.0f), ImGuiCond_FirstUseEver);
+  ImGui::SetNextWindowPos(ImVec2(400.0f, 300.0f), ImGuiCond_FirstUseEver);
+
+  ImGuiWindowFlags flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoResize;
+
+  static char text[1024 * 16] = "test\n";
+  if(ImGui::Begin("TEST", nullptr, flags)){
+    ImGui::InputTextMultiline("test", text, IM_ARRAYSIZE(text), ImVec2(-FLT_MIN, 200.0f), ImGuiInputTextFlags_AllowTabInput);
+    if(ImGui::Button("RELOAD")){
+      std::ofstream out("./shaders/vertex.glsl");
+      out << text;
+      out.close();
+      shaderProgram.reload("./shaders/vertex.glsl", "./shaders/fragment.glsl");
+    }
+    if(ImGui::Button("CLOSE")){
+      glfwSetWindowShouldClose(window, true);
+    }
+  }
+
+  ImGui::End();
+}
+
 int App::Initiate(){
   glfwInit();
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -99,7 +122,8 @@ void App::Run(){
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
-    ImGui::ShowDemoWindow();
+
+    shaderEditorWindow(shaderProgram);
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

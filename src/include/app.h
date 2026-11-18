@@ -16,5 +16,6 @@ class App {
     void Destroy();
 
   private:
+    void shaderEditorWindow(Shader&);
     GLFWwindow* window;
 };
